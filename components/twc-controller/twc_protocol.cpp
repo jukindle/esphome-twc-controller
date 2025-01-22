@@ -111,7 +111,7 @@ namespace esphome {
                                 twc->SendCommand(GET_FIRMWARE_VER_EXT, twc->chargers[i]->twcid);
                                 break;
                         }
-                        vTaskDelay(1000+random(100,200)/portTICK_PERIOD_MS);
+                        vTaskDelay(500+random(100,200)/portTICK_PERIOD_MS);
                     }
 
                     if (commandNumber >= 5) {
