@@ -795,11 +795,14 @@ namespace esphome {
             outputBuffer[j++] = 0xFF;
 
             if (debug_) {
-                ESP_LOGV(TAG, "Sent packet: ");
+                std::string logMessage = "Sent packet:";
                 for (uint8_t i = 0; i < j; i++) {
-                    ESP_LOGD(TAG, "%02x", outputBuffer[i]);
+                    // Temporary buffer for one formatted byte, including space
+                    char temp[4]; // enough for " %02X" + null terminator
+                    sprintf(temp, " %02X", outputBuffer[i]);
+                    logMessage += temp;
                 }
-
+                ESP_LOGD(TAG, "%s", logMessage.c_str());
             }
 
             if (this->flow_control_pin_ != nullptr)
