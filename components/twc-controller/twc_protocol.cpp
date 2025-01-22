@@ -685,10 +685,6 @@ namespace esphome {
 
         // Process a fully received packet (i.e. data with C0 on each end)
         void TeslaController::ProcessPacket(uint8_t *packet, size_t length) {
-            if (debug_) {
-                ESP_LOGD(TAG, "Recieved Packet: ");
-                controller_io_->writeRawPacket(packet, length);
-            }
 
             if (!VerifyChecksum(packet, length)) {
                 ESP_LOGD(TAG, "Error processing packet - checksum verify failed. Full packet: ");
