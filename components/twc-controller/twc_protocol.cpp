@@ -40,6 +40,7 @@ namespace esphome {
             debug_(false),
             passive_mode_(passive_mode)
         {
+            Debug(true);
         }
 
         void TeslaController::Begin() {
