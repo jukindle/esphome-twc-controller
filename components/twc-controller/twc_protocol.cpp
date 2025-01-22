@@ -685,6 +685,17 @@ namespace esphome {
 
         // Process a fully received packet (i.e. data with C0 on each end)
         void TeslaController::ProcessPacket(uint8_t *packet, size_t length) {
+            if (debug_) {
+                std::string logMessage = "Received packet:";
+                for (uint8_t i = 0; i < length; i++) {
+                    // Temporary buffer for one formatted byte, including space
+                    char temp[4]; // enough for " %02X" + null terminator
+                    sprintf(temp, " %02X", packet[i]);
+                    logMessage += temp;
+                }
+                ESP_LOGD(TAG, "%s", logMessage.c_str());
+            }
+
 
             if (!VerifyChecksum(packet, length)) {
                 ESP_LOGD(TAG, "Error processing packet - checksum verify failed. Full packet: ");
